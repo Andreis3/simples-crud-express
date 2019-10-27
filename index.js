@@ -37,8 +37,7 @@ function checkUserInArray(req, res, next){
 };
 
 function returnUserMap (users) {
-  return users.map(user => ({name: `${user}`}))
-  next();
+  return users.map(user => ({name: `${user}`})) 
 };
 
 server.get('/teste', (req, res) => {
@@ -47,8 +46,8 @@ server.get('/teste', (req, res) => {
 });
 
 server.get('/users', (req, res) => {
-  const usuario = returnUserMap(users)
-  return res.json(usuario);
+  const usuario = returnUserMap(users);
+  return res.json({Users: usuario});
 });
 
 server.get('/users/:index', checkUserInArray, (req, res) => {
@@ -61,7 +60,7 @@ server.post('/users', checkUserExists, (req, res) => {
   const { name } = req.body;
   users.push(name);
   const usuario = returnUserMap(users);
-  return res.json(usuario);
+  return res.json({Users: usuario});
 });
 
 server.put('/users/:index', checkUserExists, checkUserInArray, (req, res) => {
@@ -70,7 +69,7 @@ server.put('/users/:index', checkUserExists, checkUserInArray, (req, res) => {
 
   users[index] = name;
   const usuario = returnUserMap(users);
-  return res.json(usuario);
+  return res.json({Users: usuario});
 });
 
 server.delete('/users/:index', checkUserInArray, (req, res) => {
