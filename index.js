@@ -60,7 +60,7 @@ server.post('/users', checkUserExists, (req, res) => {
   const { name } = req.body;
   users.push(name);
   const usuario = returnUserMap(users);
-  return res.json({Users: usuario});
+  return res.json(usuario[usuario.length - 1]);
 });
 
 server.put('/users/:index', checkUserExists, checkUserInArray, (req, res) => {
@@ -69,7 +69,7 @@ server.put('/users/:index', checkUserExists, checkUserInArray, (req, res) => {
 
   users[index] = name;
   const usuario = returnUserMap(users);
-  return res.json({Users: usuario});
+  return res.json(usuario[index]);
 });
 
 server.delete('/users/:index', checkUserInArray, (req, res) => {
